@@ -17,7 +17,7 @@ $script = <<SCRIPT
   echo 'gem: --no-ri --no-rdoc' >> /home/ubuntu/.gemrc
 
   # install required ruby versions
-  rvm install 2.4
+  rvm install 2.4.0
   ruby -v
 
   # install bundler
