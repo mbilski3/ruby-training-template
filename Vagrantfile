@@ -17,12 +17,16 @@ $script = <<SCRIPT
   echo 'gem: --no-ri --no-rdoc' >> /home/ubuntu/.gemrc
 
   # install required ruby versions
-  rvm install $(cat /var/www/app/.ruby-version)
+  RUBY_VERSION=$(cat /var/www/app/.ruby-version)
+  RUBY_GEMSET=$(cat /var/www/app/.ruby-gemset)
+  RUBY_VERSION=${RUBY_VERSION%$'\r'}
+  RUBY_GEMSET=${RUBY_GEMSET%$'\r'}
+  rvm install $RUBY_VERSION
   ruby -v
 
-  rvm gemset create $(cat /var/www/app/.ruby-gemset)
+  rvm gemset create $RUBY_GEMSET
 
-  rvm use $(cat /var/www/app/.ruby-version)@$(cat /var/www/app/.ruby-gemset)
+  rvm use $RUBY_VERSION@$RUBY_GEMSET
 
   # install bundler
   rvm all do gem install bundler -q --no-doc --no-ri
