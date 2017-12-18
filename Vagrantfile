@@ -37,6 +37,9 @@ SCRIPT
 
 $run_server = <<SCRIPT
   cd /var/www/app && bundle
+  if [ -f /var/www/app/tmp/thin.pid ]; then
+    thin -R /var/www/app/config.ru -p 9292 -P /var/www/app/tmp/thin.pid -l /var/www/app/log/thin.log -d stop
+  fi
   thin -R /var/www/app/config.ru -p 9292 -P /var/www/app/tmp/thin.pid -l /var/www/app/log/thin.log -d start
 SCRIPT
 
@@ -49,7 +52,7 @@ Vagrant.configure("2") do |config|
     # web.vm.network :private_network, ip: '192.168.2.100'
     web.vm.network "forwarded_port", guest: 9292, host: 9292
     web.vm.synced_folder "./", "/var/www/app"
-    web.vm.provision "shell", inline: $script, privileged: false
-    web.vm.provision "shell", inline: $run_server, run: 'always', privileged: false
+    web.vm.provision "setup", inline: $script, privileged: false, type: 'shell'
+    web.vm.provision "server", inline: $run_server, run: 'always', privileged: false, type: 'shell'
   end
 end
