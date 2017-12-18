@@ -17,8 +17,12 @@ $script = <<SCRIPT
   echo 'gem: --no-ri --no-rdoc' >> /home/ubuntu/.gemrc
 
   # install required ruby versions
-  rvm install 2.4.0
+  rvm install $(cat /var/www/app/.ruby-version)
   ruby -v
+
+  rvm gemset create $(cat /var/www/app/.ruby-gemset)
+
+  rvm use $(cat /var/www/app/.ruby-version)@$(cat /var/www/app/.ruby-gemset)
 
   # install bundler
   rvm all do gem install bundler -q --no-doc --no-ri
