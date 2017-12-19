@@ -7,6 +7,7 @@ class MainController < BaseController
   end
 
   get '/data.json' do
+    content_type 'application/json'
     JSON({x: 5})
   end
 
