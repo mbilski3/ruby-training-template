@@ -3,3 +3,10 @@
 = @zmienna
 = time
 = ENV['GEM_PATH']
+
+%hr
+
+%form{action: '/api/update', method: 'post'}
+  %input{type: 'hidden', name: 'authenticity_token', value: h(session[:csrf])}
+  %input{type: 'text', name: 'name', value: ''}
+  %input{type: 'submit', value: 'Submit'}

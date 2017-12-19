@@ -25,4 +25,10 @@ class MainController < BaseController
   get '/posts/:author' do |author|
     haml :post_show
   end
+
+  post '/update' do
+    # This block modifies something
+    content_type :json
+    {status: :ok}.to_json
+  end
 end

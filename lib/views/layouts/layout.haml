@@ -1,5 +1,6 @@
 %html
   %head
+    %meta{content: h(session[:csrf]), name: 'csrf-token'}
     %link{rel: :stylesheet, type: "text/css", href: "/css/app.css"}
   %body
     = yield

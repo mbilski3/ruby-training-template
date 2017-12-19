@@ -37,6 +37,9 @@ $script = <<SCRIPT
   # install thin
   rvm all do gem install thin -q --no-doc --no-ri
 
+  # alias for quick access to app dir
+
+  echo 'alias app="cd /var/www/app"' >> /home/ubuntu/.gemrc
 SCRIPT
 
 $run_server = <<SCRIPT
