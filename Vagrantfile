@@ -39,7 +39,7 @@ $script = <<SCRIPT
 
   # alias for quick access to app dir
 
-  echo 'alias app="cd /var/www/app"' >> /home/ubuntu/.gemrc
+  echo 'alias app="cd /var/www/app"' >> /home/ubuntu/.bashrc
 SCRIPT
 
 $run_server = <<SCRIPT
